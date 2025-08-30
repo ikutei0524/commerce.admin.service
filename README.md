@@ -19,6 +19,8 @@
 ```
 - 2025/08/30 build project
 - 2025/08/30 finish commit init project & variable definition
+- 2025/08/30 begin design repositories & UserController
+
 ```
 
 #### 下方為各資料表設計
