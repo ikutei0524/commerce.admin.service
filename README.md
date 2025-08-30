@@ -16,7 +16,164 @@
 
 - 評論模組
 
+```
+- 2025/08/30 build project
+- 2025/08/30 finish commit init project & variable definition
+```
 
+#### 下方為各資料表設計
+|      users     |           |             |   |   |
+|:--------------:|:---------:|:-----------:|---|---|
+|       id       |    int    | primary_key |   |   |
+|   first_name   |   string  |             |   |   |
+|    last_name   |   string  |             |   |   |
+|      email     |   string  |             |   |   |
+|    birthday    |    date   |             |   |   |
+|     address    |   string  |             |   |   |
+|      city      |   string  |             |   |   |
+|      state     |   string  |             |   |   |
+|     zipcode    |   string  |             |   |   |
+|    password    |   string  |             |   |   |
+| has_newsletter |  boolean  |             |   |   |
+|  last_seen_at  | date_time |             |   |   |
+|   created_at   | date_time |             |   |   |
+|   deleted_at   | date_time |             |   |   |
+|    is_delete   |  boolean  |             |   |   |
+
+
+|  user_segments |           |             |   |   |
+|:--------------:|:---------:|:-----------:|---|---|
+|       id       |    int    | primary_key |   |   |
+|     user_id    |    int    | foreign_key |   |   |
+|   segment_id   |    int    | foreign_key |   |   |
+|   created_at   | date_time |             |   |   |
+|   deleted_at   | date_time |             |   |   |
+|   deleted_at   | date_time |             |   |   |
+|   updated_at   | date_time |             |   |   |
+|      state     |   string  |             |   |   |
+|     zipcode    |   string  |             |   |   |
+|    password    |   string  |             |   |   |
+| has_newsletter |  boolean  |             |   |   |
+|  last_seen_at  | date_time |             |   |   |
+|   created_at   | date_time |             |   |   |
+|   deleted_at   | date_time |             |   |   |
+|    is_delete   |  boolean  |             |   |   |
+
+
+|    segments    |           |             |   |   |
+|:--------------:|:---------:|:-----------:|---|---|
+|       id       |    int    | primary_key |   |   |
+|      name      |   string  |             |   |   |
+|   created_at   | date_time |             |   |   |
+|   deleted_at   | date_time |             |   |   |
+|   deleted_at   | date_time |             |   |   |
+|   deleted_at   | date_time |             |   |   |
+|   updated_at   | date_time |             |   |   |
+|      state     |   string  |             |   |   |
+|     zipcode    |   string  |             |   |   |
+|    password    |   string  |             |   |   |
+| has_newsletter |  boolean  |             |   |   |
+|  last_seen_at  | date_time |             |   |   |
+|   created_at   | date_time |             |   |   |
+|   deleted_at   | date_time |             |   |   |
+|    is_delete   |  boolean  |             |   |   |
+
+
+|     products    |           |             |   |   |
+|:---------------:|:---------:|:-----------:|---|---|
+|        id       |    int    | primary_key |   |   |
+|  categories_id  |    int    | foreign_key |   |   |
+| image_thumbnail |   string  |             |   |   |
+|    image_url    |   string  |             |   |   |
+|   description   |   string  |             |   |   |
+|      width      |   double  |             |   |   |
+|      height     |   double  |             |   |   |
+|      price      |  decimal  |             |   |   |
+|      sales      |    int    |             |   |   |
+|      stock      |    int    |             |   |   |
+|    created_at   | date_time |             |   |   |
+|    deleted_at   | date_time |             |   |   |
+|    updated_at   | date_time |             |   |   |
+|    deleted_at   | date_time |             |   |   |
+|    is_delete    |  boolean  |             |   |   |
+
+
+| categories |           |             |   |   |
+|:----------:|:---------:|:-----------:|---|---|
+|     id     |    int    | primary_key |   |   |
+|    name    |   string  |             |   |   |
+| created_at | date_time |             |   |   |
+| deleted_at | date_time |             |   |   |
+|    width   |   double  |             |   |   |
+|   height   |   double  |             |   |   |
+|    price   |  decimal  |             |   |   |
+|    sales   |    int    |             |   |   |
+|    stock   |    int    |             |   |   |
+| created_at | date_time |             |   |   |
+| deleted_at | date_time |             |   |   |
+| updated_at | date_time |             |   |   |
+| created_at | date_time |             |   |   |
+| deleted_at | date_time |             |   |   |
+|  is_delete |  boolean  |             |   |   |
+
+
+|    orders   |           |             |   |   |
+|:-----------:|:---------:|:-----------:|---|---|
+|      id     |    int    | primary_key |   |   |
+|   user_id   |    int    | foreign_key |   |   |
+| total_price |  decimal  |             |   |   |
+|    status   |    enum   |             |   |   |
+|  created_at | date_time |             |   |   |
+|  deleted_at | date_time |             |   |   |
+|    height   |   double  |             |   |   |
+|    price    |  decimal  |             |   |   |
+|    sales    |    int    |             |   |   |
+|    stock    |    int    |             |   |   |
+|  created_at | date_time |             |   |   |
+|  deleted_at | date_time |             |   |   |
+|  updated_at | date_time |             |   |   |
+|  deleted_at | date_time |             |   |   |
+|  is_delete  |  boolean  |             |   |   |
+
+
+| order_item |           |             |   |   |
+|:----------:|:---------:|:-----------:|---|---|
+|     id     |    int    | primary_key |   |   |
+|  order_id  |    int    | foreign_key |   |   |
+| product_id |    int    | foreign_key |   |   |
+|  quantity  |    int    |             |   |   |
+|    price   |  decimal  |             |   |   |
+| created_at | date_time |             |   |   |
+| deleted_at | date_time |             |   |   |
+|    price   |  decimal  |             |   |   |
+|    sales   |    int    |             |   |   |
+|    stock   |    int    |             |   |   |
+| created_at | date_time |             |   |   |
+| deleted_at | date_time |             |   |   |
+| updated_at | date_time |             |   |   |
+| deleted_at | date_time |             |   |   |
+|  is_delete |  boolean  |             |   |   |
+
+
+|   reviews  |           |             |   |   |
+|:----------:|:---------:|:-----------:|---|---|
+|     id     |    int    | primary_key |   |   |
+|   user_id  |    int    | foreign_key |   |   |
+| product_id |    int    | foreign_key |   |   |
+|   rating   |    int    |             |   |   |
+|   comment  |    TEXT   |             |   |   |
+| created_at | date_time |             |   |   |
+| deleted_at | date_time |             |   |   |
+| updated_at | date_time |             |   |   |
+|    sales   |    int    |             |   |   |
+|    stock   |    int    |             |   |   |
+| created_at | date_time |             |   |   |
+| deleted_at | date_time |             |   |   |
+| updated_at | date_time |             |   |   |
+| deleted_at | date_time |             |   |   |
+|  is_delete |  boolean  |             |   |   |
+
+```
 
 
 
