@@ -19,6 +19,10 @@ public class Segment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @OneToMany(mappedBy = "segment")
+    private List<UserSegment> userSegments;
+    // 一對多：segment -> userSegments
+
     @Column(name = "name")
     private String name;
 
@@ -28,7 +32,6 @@ public class Segment {
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
-    @OneToMany(mappedBy = "segment")
-    private List<UserSegment> userSegments;
+
 
 }

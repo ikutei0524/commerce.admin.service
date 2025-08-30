@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "categories")
@@ -18,9 +19,9 @@ public class Categorie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany
-    @JoinColumn(name = "categories_id")
-    private Product products;
+    @OneToMany(mappedBy = "category")
+    private List<Product> products;
+    // 一對多：category -> products
 
     @Column(name = "name")
     private String name;

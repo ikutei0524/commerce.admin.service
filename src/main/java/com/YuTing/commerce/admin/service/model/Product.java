@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -19,14 +20,18 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToMany
-    private Review review;
-
     @ManyToOne
-    private Categorie categories;
+    @JoinColumn(name = "categories_id")
+    private Categorie categorie;
+    //多對一:product->category
 
-    @ManyToMany
-    private OrderItem orderItem;
+    @OneToMany(mappedBy = "product")
+    private List<Review> reviews;
+    //一對多:product->reviews
+
+    @OneToMany(mappedBy = "product")
+    private List<OrderItem> orderItems;
+    //一對多:product->orderItems
 
     @Column(name = "categories_id")
     private int categoriesId;

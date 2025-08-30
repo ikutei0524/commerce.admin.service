@@ -23,12 +23,15 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<UserSegment> userSegments;
+    // 一對多：user -> userSegments
 
     @OneToMany(mappedBy = "user")
     private List<Order>orders;
+    // 一對多：user -> orders
 
-    @OneToMany(mappedBy = "reviews")
-    private List<Review>reviews;
+    @OneToMany(mappedBy = "review")
+    private List<Review>review;
+    // 一對多：user -> reviews
 
     @Column(name = "first_name")
     private String firstName;

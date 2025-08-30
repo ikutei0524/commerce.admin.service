@@ -21,10 +21,12 @@ import java.time.LocalDateTime;
         @ManyToOne
         @JoinColumn(name = "segment_id")
         private Segment segment;
+        // 多對一：userSegment -> segment
 
         @ManyToOne
         @JoinColumn(name = "user_id")
         private User user;
+        // 多對一：userSegment -> user
 
         @Column(name = "user_id")
         private int userId;

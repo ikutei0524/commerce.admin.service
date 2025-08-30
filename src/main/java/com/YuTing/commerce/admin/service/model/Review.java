@@ -21,11 +21,12 @@ public class Review {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    // 多對一：review -> user
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
-
+    // 多對一：review -> product
 
     @Column(name = "user_id")
     private int userId;

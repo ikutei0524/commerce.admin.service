@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -23,9 +24,11 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    //多對一:order->user
 
-    @ManyToMany
-    private OrderItem orderItem;
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> orderItem;
+    //一對多:order->orderItems
 
     @Column(name = "user_id")
     private int userId;

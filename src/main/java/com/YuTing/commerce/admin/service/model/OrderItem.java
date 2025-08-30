@@ -20,13 +20,15 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "order_id")
-    private Order orders;
+    private Order order;
+    //多對一:orderItem->order
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "product_id")
-    private Product products;
+    private Product product;
+    //多對一:orderItem->product
 
     @Column(name = "order_id")
     private int orderId;
