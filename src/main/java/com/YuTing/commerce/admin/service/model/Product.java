@@ -22,8 +22,8 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "categories_id")
-    private Categorie categorie;
-    //多對一:product->category
+    private Categories categories;
+    //多對一:product->categories
 
     @OneToMany(mappedBy = "product")
     private List<Review> reviews;
@@ -32,9 +32,6 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<OrderItem> orderItems;
     //一對多:product->orderItems
-
-    @Column(name = "categories_id")
-    private int categoriesId;
 
     @Column(name = "image_thumbnail")
     private String imageThumbnail;

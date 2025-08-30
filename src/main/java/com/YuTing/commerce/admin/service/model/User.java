@@ -2,7 +2,7 @@ package com.YuTing.commerce.admin.service.model;
 
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.Order;
+import com.YuTing.commerce.admin.service.model.Order;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,8 +29,8 @@ public class User {
     private List<Order>orders;
     // 一對多：user -> orders
 
-    @OneToMany(mappedBy = "review")
-    private List<Review>review;
+    @OneToMany(mappedBy = "user")
+    private List<Review>reviews;
     // 一對多：user -> reviews
 
     @Column(name = "first_name")

@@ -28,12 +28,6 @@ public class Review {
     private Product product;
     // 多對一：review -> product
 
-    @Column(name = "user_id")
-    private int userId;
-
-    @Column(name = "product_id")
-    private int productId;
-
     @Column(name = "rating")
     private int rating;
 

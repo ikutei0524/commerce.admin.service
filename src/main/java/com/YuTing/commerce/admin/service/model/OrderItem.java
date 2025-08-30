@@ -30,12 +30,6 @@ public class OrderItem {
     private Product product;
     //多對一:orderItem->product
 
-    @Column(name = "order_id")
-    private int orderId;
-
-    @Column(name = "product_id")
-    private int productId;
-
     @Column(name = "quantity")
     private int quantity;
 

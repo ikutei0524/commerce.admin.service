@@ -30,9 +30,6 @@ public class Order {
     private List<OrderItem> orderItem;
     //一對多:order->orderItems
 
-    @Column(name = "user_id")
-    private int userId;
-
     @Column(name = "total_price")
     private int totalPrice;
 

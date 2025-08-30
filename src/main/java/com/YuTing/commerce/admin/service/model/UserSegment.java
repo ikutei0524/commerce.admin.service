@@ -28,12 +28,6 @@ import java.time.LocalDateTime;
         private User user;
         // 多對一：userSegment -> user
 
-        @Column(name = "user_id")
-        private int userId;
-
-        @Column(name = "segment_id")
-        private int segmentId;
-
         @Column(name = "created_at")
         private LocalDateTime createdAt;
 

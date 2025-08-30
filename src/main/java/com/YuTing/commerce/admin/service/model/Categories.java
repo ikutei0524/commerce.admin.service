@@ -14,12 +14,12 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Categorie {
+public class Categories {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "categories")
     private List<Product> products;
     // 一對多：category -> products
 
