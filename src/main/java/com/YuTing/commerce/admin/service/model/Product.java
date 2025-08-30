@@ -14,10 +14,19 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Products {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @ManyToMany
+    private Review review;
+
+    @ManyToOne
+    private Categorie categories;
+
+    @ManyToMany
+    private OrderItem orderItem;
 
     @Column(name = "categories_id")
     private int categoriesId;

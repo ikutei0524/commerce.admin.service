@@ -1,50 +1,57 @@
 package com.YuTing.commerce.admin.service.model;
 
 
+import com.YuTing.commerce.admin.service.model.enums.OrderStatusEnum;//使用enums裡的OrderStatus
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 
-
 @Entity
-@Table(name = "order_item")
+@Table(name = "orders")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderItem {
+
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToMany
-    @JoinColumn(name = "order_id")
-    private Order orders;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToMany
-    @JoinColumn(name = "product_id")
-    private Product products;
+    private OrderItem orderItem;
 
-    @Column(name = "order_id")
-    private int orderId;
+    @Column(name = "user_id")
+    private int userId;
 
-    @Column(name = "product_id")
-    private int productId;
+    @Column(name = "total_price")
+    private int totalPrice;
 
-    @Column(name = "quantity")
-    private int quantity;
-
-    @Column(name = "price")
-    private DecimalFormat price;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private OrderStatusEnum status;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
+
+
+
+
+
+
+
+
+
+
 
 
 }

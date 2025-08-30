@@ -7,13 +7,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "segments")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Segments {
+public class Segment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -26,5 +27,8 @@ public class Segments {
 
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
+
+    @OneToMany(mappedBy = "segment")
+    private List<UserSegment> userSegments;
 
 }

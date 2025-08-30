@@ -13,10 +13,18 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-    public class UserSegments {
+    public class UserSegment {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
+
+        @ManyToOne
+        @JoinColumn(name = "segment_id")
+        private Segment segment;
+
+        @ManyToOne
+        @JoinColumn(name = "user_id")
+        private User user;
 
         @Column(name = "user_id")
         private int userId;

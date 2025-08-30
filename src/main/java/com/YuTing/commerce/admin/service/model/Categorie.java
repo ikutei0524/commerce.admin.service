@@ -6,30 +6,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.swing.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "segments")
+@Table(name = "categories")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reviews {
+public class Categorie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "user_id")
-    private int userId;
+    @OneToMany
+    @JoinColumn(name = "categories_id")
+    private Product products;
 
-    @Column(name = "product_id")
-    private int productId;
-
-    @Column(name = "rating")
-    private int rating;
-
-    @Column(name = "comment", columnDefinition = "TEXT")
-    private String comment;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -37,7 +31,5 @@ public class Reviews {
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
 
 }

@@ -1,7 +1,6 @@
 package com.YuTing.commerce.admin.service.model;
 
 
-import com.YuTing.commerce.admin.service.model.enums.OrderStatusEnum;//使用enums裡的OrderStatus
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,25 +9,35 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "segments")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class Orders {
+public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToMany
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+
     @Column(name = "user_id")
     private int userId;
 
-    @Column(name = "total_price")
-    private int totalPrice;
+    @Column(name = "product_id")
+    private int productId;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    private OrderStatusEnum status;
+    @Column(name = "rating")
+    private int rating;
+
+    @Column(name = "comment", columnDefinition = "TEXT")
+    private String comment;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -36,15 +45,7 @@ public class Orders {
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
-
-
-
-
-
-
-
-
-
-
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
 }
