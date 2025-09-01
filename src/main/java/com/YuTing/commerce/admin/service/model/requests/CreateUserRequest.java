@@ -1,28 +1,21 @@
-package com.YuTing.commerce.admin.service.model.responses;
+package com.YuTing.commerce.admin.service.model.requests;
 
 import com.YuTing.commerce.admin.service.model.Order;
 import com.YuTing.commerce.admin.service.model.Review;
-import com.YuTing.commerce.admin.service.model.User;
+
 import com.YuTing.commerce.admin.service.model.UserSegment;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserResponse {
-
-    private UserSegment userSegments;
-
-    private Order orders;
-
-    private Review reviews;
+public class CreateUserRequest {
 
     private String firstName;
 
@@ -40,7 +33,6 @@ public class UserResponse {
 
     private String zipcode;
 
-    @JsonIgnore
     private String password;
 
     private boolean hasNewsletter;
@@ -55,6 +47,5 @@ public class UserResponse {
 
     private String role;
 
-    public UserResponse(User users) {
-    }
+
 }
