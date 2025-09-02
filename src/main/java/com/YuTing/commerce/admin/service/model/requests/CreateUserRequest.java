@@ -33,19 +33,11 @@ public class CreateUserRequest {
 
     private String zipcode;
 
-    private String password;
-
     private boolean hasNewsletter;
 
-    private LocalDateTime lastSeenAt;
 
-    private LocalDateTime createdAt;
 
-    private LocalDateTime deletedAt;
 
-    private boolean isDelete;
-
-    private String role;
 
 
 }

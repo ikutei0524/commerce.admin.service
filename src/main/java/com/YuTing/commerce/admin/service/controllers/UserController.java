@@ -89,7 +89,7 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<User>createUser(@RequestBody CreateUserRequest request){
+    public ResponseEntity<UserResponse>createUser(@RequestBody CreateUserRequest request){
         User user = new User();
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
@@ -100,18 +100,16 @@ public class UserController {
         user.setState(request.getState());
         user.setZipcode(request.getZipcode());
         user.setHasNewsletter(request.isHasNewsletter());
-        user.setRole(request.getRole());
-
-        // 設定自動時間（後端自己管，不要從 request 帶進來）,待改善
         user.setCreatedAt(LocalDateTime.now());
         user.setLastSeenAt(LocalDateTime.now());
         user.setDelete(false);
 
-        // 儲存
-        User savedUser = userRepository.save(user);
 
-        UserResponse response = new UserResponse(savedUser);
-        return ResponseEntity.notFound().build();
+        System.out.println("儲存之前"+user);
+        User saveduser = userRepository.save(user);
+        // 包裝成 UserResponse (對外不會回傳密碼)
+        UserResponse response = new UserResponse(saveduser);
+        return ResponseEntity.ok(response);
     }
 
 
