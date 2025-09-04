@@ -20,6 +20,20 @@
 - 2025/08/30 build project
 - 2025/08/30 finish commit init project & variable definition
 - 2025/08/30 begin design repositories & UserController
+- 2025/09/04 no swagger text
+used Chatgpt design
+----------------------
+User Service fixed
+User Repository fixed
+User Segment fixed
+User Response fixed
+User Request fixed
+User fixed
+User CRUD fixed
+----------------------
+Create UserSegmentResponse
+Create Mapper
+Used Mapper in Service
 
 ```
 
