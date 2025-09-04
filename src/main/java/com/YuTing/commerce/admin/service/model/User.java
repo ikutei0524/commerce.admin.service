@@ -2,7 +2,7 @@ package com.YuTing.commerce.admin.service.model;
 
 
 import jakarta.persistence.*;
-import com.YuTing.commerce.admin.service.model.Order;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

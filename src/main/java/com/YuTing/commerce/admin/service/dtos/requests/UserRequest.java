@@ -1,4 +1,5 @@
-package com.YuTing.commerce.admin.service.model.requests;
+package com.YuTing.commerce.admin.service.dtos.requests;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,29 +8,19 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateUserRequest {
-
+@Data
+public class UserRequest {
     private String firstName;
-
     private String lastName;
-
     private String email;
-
     private LocalDate birthday;
-
     private String address;
-
     private String city;
-
     private String state;
-
     private String zipcode;
-
     private String password;
-
     private boolean hasNewsletter;
-
+    private String role;
 }
