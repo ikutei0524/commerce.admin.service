@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 @Tag(name = "User Management", description = "CRUD APIs for User")
 public class UserController {
@@ -29,7 +29,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     @Operation(summary = "藉由ID取得使用者資料")
-    public ResponseEntity<UserResponse> getUser(@PathVariable int id) {
+    public ResponseEntity<UserResponse> getAllUser(@PathVariable int id) {
         return ResponseEntity.ok(userService.getUser(id));
     }
 
@@ -41,13 +41,13 @@ public class UserController {
 
     @PutMapping("/{id}")
     @Operation(summary = "更新使用者")
-    public ResponseEntity<UserResponse> updateUser(@PathVariable int id, @RequestBody UserRequest request) {
+    public ResponseEntity<UserResponse> updateUserById(@PathVariable int id, @RequestBody UserRequest request) {
         return ResponseEntity.ok(userService.updateUser(id, request));
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "刪除使用者資料 (軟刪除)")
-    public ResponseEntity<Void> deleteUser(@PathVariable int id) {
+    public ResponseEntity<Void> deleteUserById(@PathVariable int id) {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
