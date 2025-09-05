@@ -34,6 +34,16 @@ User CRUD fixed
 Create UserSegmentResponse
 Create Mapper
 Used Mapper in Service
+----------------------
+- 2025/09/05 used Chatgpt design
+----------------------
+Fixed User logic  in UserService
+----------------------
+Insert UserSegment insert to UserController
+----------------------
+UserSegment Integer id replace int id
+----------------------
+The content of UserController is more concise
 
 ```
 
