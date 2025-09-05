@@ -1,30 +1,64 @@
 package com.YuTing.commerce.admin.service.services;
 
 import com.YuTing.commerce.admin.service.dtos.requests.UserRequest;
+import com.YuTing.commerce.admin.service.dtos.responses.PageResponse;
 import com.YuTing.commerce.admin.service.dtos.responses.UserResponse;
 import com.YuTing.commerce.admin.service.mappers.UserMapper;
+import com.YuTing.commerce.admin.service.model.Segment;
 import com.YuTing.commerce.admin.service.model.User;
+import com.YuTing.commerce.admin.service.model.UserSegment;
+import com.YuTing.commerce.admin.service.repositories.SegmentRepository;
 import com.YuTing.commerce.admin.service.repositories.UserRepository;
+import com.YuTing.commerce.admin.service.repositories.UserSegmentRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
+    private final UserSegmentRepository userSegmentRepository;
     private final UserRepository userRepository;
+    private final SegmentRepository segmentRepository;
     private final UserMapper userMapper = new UserMapper();
+
 
     public UserResponse createUser(UserRequest request) {
         User user = userMapper.toUser(request);
         user.setCreatedAt(LocalDateTime.now());
         user.setLastSeenAt(LocalDateTime.now());
         user.setDelete(false);
-        return userMapper.toUserResponse(userRepository.save(user));
+        User savedUser = userRepository.save(user);
+
+        // 如果有 segmentIds，就建立 UserSegment 關聯
+        if (request.getSegmentIds() != null) {
+            for (Integer segmentId : request.getSegmentIds()) {
+                Segment segment = segmentRepository.findById(segmentId)
+                        .orElseThrow(() -> new RuntimeException("若沒有找到Segment:" + segmentId));
+
+                UserSegment userSegment = new UserSegment();
+                userSegment.setUser(user);
+                userSegment.setSegment(segment);
+                userSegment.setCreatedAt(LocalDateTime.now());
+
+                userSegmentRepository.save(userSegment);
+            }
+        }
+
+        // 3. 回傳 Response
+        return userMapper.toUserResponse(userRepository.findById(user.getId()).orElseThrow());
     }
+
+
+
+
+
 
     public UserResponse updateUser(int id, UserRequest request) {
         User user = userRepository.findById(id).orElseThrow();
@@ -61,5 +95,23 @@ public class UserService {
                 .map(userMapper::toUserResponse)
                 .toList();
     }
+
+    //page api
+    public PageResponse<UserResponse> getUsersWithPagination(int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<UserResponse> usersPage = userRepository.findAll(pageRequest)
+                .map(userMapper::toUserResponse);
+
+        return new PageResponse<>(
+                usersPage.getContent(),
+                usersPage.getNumber(),
+                usersPage.getSize(),
+                usersPage.getTotalElements(),
+                usersPage.getTotalPages()
+        );
+    }
+
+
+
 }
 

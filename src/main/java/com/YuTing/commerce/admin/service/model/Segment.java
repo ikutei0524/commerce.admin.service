@@ -17,7 +17,7 @@ import java.util.List;
 public class Segment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @OneToMany(mappedBy = "segment")
     private List<UserSegment> userSegments;
@@ -32,6 +32,6 @@ public class Segment {
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
-
-
+    public Segment(Integer segmentId) {
+    }
 }

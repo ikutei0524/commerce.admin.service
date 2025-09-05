@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
     public class UserSegment {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private int id;
+        private Integer id;
 
         @ManyToOne
         @JoinColumn(name = "segment_id")
@@ -33,6 +33,7 @@ import java.time.LocalDateTime;
 
         @Column(name = "deleted_at")
         private LocalDateTime deletedAt;
+
 
 
 }

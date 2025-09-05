@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @NoArgsConstructor
@@ -23,4 +24,6 @@ public class UserRequest {
     private String password;
     private boolean hasNewsletter;
     private String role;
+
+    private List<Integer> segmentIds;
 }
