@@ -19,7 +19,7 @@ public class Segment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany(mappedBy = "segment")
+    @OneToMany(mappedBy = "segment", fetch = FetchType.LAZY)
     private List<UserSegment> userSegments;
     // 一對多：segment -> userSegments
 

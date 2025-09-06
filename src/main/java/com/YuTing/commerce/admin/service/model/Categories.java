@@ -19,7 +19,7 @@ public class Categories {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany(mappedBy = "categories")
+    @OneToMany(mappedBy = "categories",fetch = FetchType.LAZY)
     private List<Product> products;
     // 一對多：category -> products
 
