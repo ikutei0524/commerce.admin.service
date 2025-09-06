@@ -17,12 +17,16 @@
 - 評論模組
 
 ```
-- 2025/08/30 build project
-- 2025/08/30 finish commit init project & variable definition
-- 2025/08/30 begin design repositories & UserController
-- 2025/09/04 no swagger text
+- 2025/08/30 
+build project
+- 2025/08/30 
+finish commit init project & variable definition
+- 2025/08/30 
+begin design repositories & UserController
+- 2025/09/04 
+no swagger text
 used Chatgpt design
-----------------------
+--------------------------------------------
 User Service fixed
 User Repository fixed
 User Segment fixed
@@ -30,20 +34,26 @@ User Response fixed
 User Request fixed
 User fixed
 User CRUD fixed
-----------------------
+--------------------------------------------
 Create UserSegmentResponse
 Create Mapper
 Used Mapper in Service
-----------------------
-- 2025/09/05 used Chatgpt design
-----------------------
+--------------------------------------------
+- 2025/09/05 
+used Chatgpt design
+--------------------------------------------
 Fixed User logic  in UserService
-----------------------
+--------------------------------------------
 Insert UserSegment insert to UserController
-----------------------
+--------------------------------------------
 UserSegment Integer id replace int id
-----------------------
+--------------------------------------------
 The content of UserController is more concise
+--------------------------------------------
+- 2025/09/06 
+Controller(PageDesign)
+Fixed UserController in UserService
+--------------------------------------------
 
 ```
 
