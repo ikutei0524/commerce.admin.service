@@ -10,12 +10,16 @@ import com.YuTing.commerce.admin.service.model.UserSegment;
 import com.YuTing.commerce.admin.service.repositories.SegmentRepository;
 import com.YuTing.commerce.admin.service.repositories.UserRepository;
 import com.YuTing.commerce.admin.service.repositories.UserSegmentRepository;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -97,9 +101,13 @@ public class UserService {
     }
 
     //page api
-    public PageResponse<UserResponse> getUsersWithPagination(int page, int size) {
+    public PageResponse<UserResponse> getUsersWithPagination(
+            int page, int size, String query, Boolean hasNewsletter, Integer segmentId) {
+
         PageRequest pageRequest = PageRequest.of(page, size);
-        Page<UserResponse> usersPage = userRepository.findAll(pageRequest)
+        Specification<User> spec = userSpecification(query, hasNewsletter, segmentId);
+
+        Page<UserResponse> usersPage = userRepository.findAll(spec, pageRequest)
                 .map(userMapper::toUserResponse);
 
         return new PageResponse<>(
@@ -109,6 +117,35 @@ public class UserService {
                 usersPage.getTotalElements(),
                 usersPage.getTotalPages()
         );
+    }
+
+
+
+    private Specification<User> userSpecification(String queryName, Boolean hasNewsletter, Integer segmentId) {
+        return (root, query, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+
+            // 模糊搜尋 firstName / lastName
+            if (queryName != null && !queryName.isEmpty()) {
+                predicates.add(criteriaBuilder.or(
+                        criteriaBuilder.like(criteriaBuilder.lower(root.get("firstName")), "%" + queryName.toLowerCase() + "%"),
+                        criteriaBuilder.like(criteriaBuilder.lower(root.get("lastName")), "%" + queryName.toLowerCase() + "%")
+                ));
+            }
+
+            // 篩選 newsletter
+            if (hasNewsletter != null) {
+                predicates.add(criteriaBuilder.equal(root.get("hasNewsletter"), hasNewsletter));
+            }
+
+            // 篩選 segment
+            if (segmentId != null) {
+                Join<User, UserSegment> userUserSegmentJoin = root.join("userSegments");
+                predicates.add(criteriaBuilder.equal(userUserSegmentJoin.get("segment").get("id"), segmentId));
+            }
+
+            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+        };
     }
 
 

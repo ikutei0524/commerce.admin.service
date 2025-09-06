@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.StringTokenizer;
 
 @RestController
 @RequestMapping("/Users")
@@ -17,7 +18,7 @@ import java.util.List;
 @Tag(name = "使用者介面", description = "使用者管理 API")
 public class UserController {
 
-    @Autowired
+
     private final UserService userService;
     //邏輯全放在UserService
 
@@ -77,13 +78,17 @@ public class UserController {
     @GetMapping("/page") // 分頁
     @Operation(
             summary = "分頁查詢使用者",
-            description = "透過 `page` 與 `size` 參數取得分頁後的使用者資料"
+            description = "透過 `page`、`size`、`query`、`hasNewsletter`、`segmentId` 條件取得分頁後的使用者資料"
     )
     public ResponseEntity<PageResponse<UserResponse>> getAllUsersPage(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "") String query,
+            @RequestParam(required = false) Boolean hasNewsletter,
+            @RequestParam(required = false) Integer segmentId
     ) {
-        PageResponse<UserResponse> users = userService.getUsersWithPagination(page, size);
+        PageResponse<UserResponse> users =
+                userService.getUsersWithPagination(page, size, query, hasNewsletter, segmentId);
         return ResponseEntity.ok(users);
     }
 
