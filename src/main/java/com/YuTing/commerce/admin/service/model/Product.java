@@ -21,7 +21,7 @@ public class Product {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "categories_id")
+    @JoinColumn(name = "categories_id", nullable = false)// FK → categories.id
     private Category category;
     // ✅ 單數，對應 Category entity
     //多對一:product->categories

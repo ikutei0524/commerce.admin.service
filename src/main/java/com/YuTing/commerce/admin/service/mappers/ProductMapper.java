@@ -30,7 +30,7 @@ public class ProductMapper {
     // 將 Request + Category 轉成 Entity (建立新 Product 用)
     public static Product toEntity(ProductRequest request, Category category) {
         Product product = new Product();
-        product.setCategory(category);
+        product.setCategory(category);// 綁上 Category
         product.setImageThumbnail(request.getImageThumbnail());
         product.setImageUrl(request.getImageUrl());
         product.setDescription(request.getDescription());
@@ -46,7 +46,7 @@ public class ProductMapper {
 
     // 更新 Product (Edit 用)
     public static void updateEntity(Product product, ProductRequest request, Category category) {
-        product.setCategory(category);
+        product.setCategory(category);// 綁上 Category
         product.setImageThumbnail(request.getImageThumbnail());
         product.setImageUrl(request.getImageUrl());
         product.setDescription(request.getDescription());

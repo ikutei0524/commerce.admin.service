@@ -1,6 +1,5 @@
 package com.YuTing.commerce.admin.service.model;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,12 +13,12 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Categories {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany(mappedBy = "categories",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)// 反向綁定 Product
     private List<Product> products;
     // 一對多：category -> products
 
@@ -31,6 +30,4 @@ public class Categories {
 
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
-
-
 }

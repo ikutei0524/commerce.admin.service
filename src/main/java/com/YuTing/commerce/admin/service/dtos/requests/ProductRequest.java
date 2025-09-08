@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Data
 public class ProductRequest {
-    private Integer categoryId;
+    private Integer categoryId;// 綁定 Category
     private String imageThumbnail;
     private String imageUrl;
     private String description;
