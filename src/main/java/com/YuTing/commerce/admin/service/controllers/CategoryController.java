@@ -2,10 +2,12 @@ package com.YuTing.commerce.admin.service.controllers;
 
 import com.YuTing.commerce.admin.service.dtos.requests.CategoryRequest;
 import com.YuTing.commerce.admin.service.dtos.responses.CategoryResponse;
+import com.YuTing.commerce.admin.service.model.Product;
 import com.YuTing.commerce.admin.service.services.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +27,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "查詢某產品分類的所有產品分類")
+    @Operation(summary = "查詢指定ID的產品分類")
     public CategoryResponse getCategoryById(@PathVariable Integer id) {
         return categoryService.getCategoryById(id);
     }
@@ -47,5 +49,27 @@ public class CategoryController {
     @Operation(summary = "刪除指定ID的產品分類")
     public void deleteCategory(@PathVariable Integer id) {
         categoryService.deleteCategory(id);
+    }
+
+    // ---------------- Product 關聯 ----------------
+    @PostMapping("/{categoryId}/products/{productId}")
+    @Operation(summary = "把商品加入指定分類")
+    public ResponseEntity<Product> addProductToCategory(@PathVariable Integer categoryId,
+                                                        @PathVariable Integer productId) {
+        return ResponseEntity.ok(categoryService.addProductToCategory(categoryId, productId));
+    }
+
+    @DeleteMapping("/{categoryId}/products/{productId}")
+    @Operation(summary = "從指定分類移除商品")
+    public ResponseEntity<Void> removeProductFromCategory(@PathVariable Integer categoryId,
+                                                          @PathVariable Integer productId) {
+        categoryService.removeProductFromCategory(categoryId, productId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{categoryId}/products")
+    @Operation(summary = "查詢指定分類下的所有商品")
+    public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable Integer categoryId) {
+        return ResponseEntity.ok(categoryService.getProductsByCategory(categoryId));
     }
 }

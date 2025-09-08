@@ -16,7 +16,7 @@ import java.util.List;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)// 反向綁定 Product
     private List<Product> products;
