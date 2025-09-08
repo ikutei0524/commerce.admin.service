@@ -8,6 +8,7 @@ import com.YuTing.commerce.admin.service.repositories.SegmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -17,7 +18,8 @@ public class SegmentService {
     private final SegmentRepository segmentRepository;
 
     public List<SegmentResponse> getAllSegments() {
-        return segmentRepository.findAll().stream()
+        return segmentRepository.findByDeletedAtIsNull()
+                .stream()
                 .map(SegmentMapper::toResponse)
                 .toList();
     }
@@ -47,6 +49,9 @@ public class SegmentService {
     }
 
     public void deleteSegment(Integer id) {
-        segmentRepository.deleteById(id);
+        Segment segment = segmentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Segment not found"));
+        segment.setDeletedAt(LocalDateTime.now()); // 標記刪除
+        segmentRepository.save(segment);
     }
 }
