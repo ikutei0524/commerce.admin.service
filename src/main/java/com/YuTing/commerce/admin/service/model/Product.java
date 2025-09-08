@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.text.DecimalFormat;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,11 +18,12 @@ import java.util.List;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categories_id")
-    private Categories categories;
+    private Category category;
+    // ✅ 單數，對應 Category entity
     //多對一:product->categories
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
@@ -49,7 +50,7 @@ public class Product {
     private double height;
 
     @Column(name = "price")
-    private DecimalFormat price; //***
+    private BigDecimal price; //***
 
     @Column(name = "sales")
     private int sales;
