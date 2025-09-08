@@ -54,6 +54,10 @@ The content of UserController is more concise
 Controller(PageDesign)
 Fixed UserController in UserService
 --------------------------------------------
+- 2025/09/08
+fixed Product&reviews
+Design ProductCRUD&Request&Response&Mapper
+&link Category
 
 ```
 
