@@ -1,5 +1,8 @@
 package com.YuTing.commerce.admin.service.services;
 
+import com.YuTing.commerce.admin.service.dtos.requests.SegmentRequest;
+import com.YuTing.commerce.admin.service.dtos.responses.SegmentResponse;
+import com.YuTing.commerce.admin.service.mappers.SegmentMapper;
 import com.YuTing.commerce.admin.service.model.Segment;
 import com.YuTing.commerce.admin.service.repositories.SegmentRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,25 +16,34 @@ public class SegmentService {
 
     private final SegmentRepository segmentRepository;
 
-    public List<Segment> getAllSegments() {
-        return segmentRepository.findAll();
+    public List<SegmentResponse> getAllSegments() {
+        return segmentRepository.findAll().stream()
+                .map(SegmentMapper::toResponse)
+                .toList();
     }
 
-    public Segment getSegmentById(Integer id) {
-        return segmentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Segment not found"));
-    }
-
-    public Segment createSegment(Segment segment) {
-        return segmentRepository.save(segment);
-    }
-
-    public Segment updateSegment(Integer id, Segment updatedSegment) {
+    public SegmentResponse getSegmentById(Integer id) {
         Segment segment = segmentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Segment not found"));
-        segment.setName(updatedSegment.getName());
-        segment.setDescription(updatedSegment.getDescription());
-        return segmentRepository.save(segment);
+        return SegmentMapper.toResponse(segment);
+    }
+
+    public SegmentResponse createSegment(SegmentRequest request) {
+        Segment segment = SegmentMapper.toEntity(request);
+        return SegmentMapper.toResponse(segmentRepository.save(segment));
+    }
+
+    // 改成接收 DTO
+    public SegmentResponse updateSegment(Integer id, SegmentRequest request) {
+        Segment segment = segmentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Segment not found"));
+
+        // 更新欄位
+        segment.setName(request.getName());
+        segment.setDescription(request.getDescription());
+
+        Segment saved = segmentRepository.save(segment);
+        return SegmentMapper.toResponse(saved);
     }
 
     public void deleteSegment(Integer id) {

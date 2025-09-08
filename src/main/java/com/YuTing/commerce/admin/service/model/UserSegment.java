@@ -1,5 +1,6 @@
 package com.YuTing.commerce.admin.service.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
 
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "segment_id")
+        @JsonBackReference
         private Segment segment;
         // 多對一：userSegment -> segment
 

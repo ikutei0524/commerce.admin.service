@@ -1,6 +1,7 @@
 package com.YuTing.commerce.admin.service.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class Segment {
     private Integer id;
 
     @OneToMany(mappedBy = "segment", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<UserSegment> userSegments;
     // 一對多：segment -> userSegments
 

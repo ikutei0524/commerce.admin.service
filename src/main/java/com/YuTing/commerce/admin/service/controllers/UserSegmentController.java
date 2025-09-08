@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/UserSegments")
 @RequiredArgsConstructor
-@Tag(name = "User-Segment Management", description = "管理使用者與分群的關聯")
+@Tag(name = "使用者與分群介面", description = "管理使用者與分群的關聯")
 public class UserSegmentController {
 
     private final UserSegmentService userSegmentService;
