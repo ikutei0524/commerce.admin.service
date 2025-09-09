@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/Segments")
 @RequiredArgsConstructor
-@Tag(name = "Segment 管理", description = "管理分群資料")
+@Tag(name = "分群管理", description = "管理分群資料")
 public class SegmentController {
 
     private final SegmentService segmentService;
