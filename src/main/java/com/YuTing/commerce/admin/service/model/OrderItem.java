@@ -3,16 +3,19 @@ package com.YuTing.commerce.admin.service.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.text.DecimalFormat;
+import java.math.BigDecimal;
+
 import java.time.LocalDateTime;
 
 
 @Entity
 @Table(name = "order_item")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderItem {
@@ -33,8 +36,8 @@ public class OrderItem {
     @Column(name = "quantity")
     private int quantity;
 
-    @Column(name = "price")
-    private DecimalFormat price;
+    @Column(name = "price", nullable = false)
+    private BigDecimal price;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

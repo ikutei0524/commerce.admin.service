@@ -37,7 +37,7 @@ public class SpringDocConfig {
     @Bean
     public GroupedOpenApi userApi() {
         return GroupedOpenApi.builder().group("public-apis")
-                .pathsToMatch("/Users/**","/Products/**","/UserSegments/**","/Categories/**","/Segments/**")
+                .pathsToMatch("/Users/**","/Products/**","/UserSegments/**","/Categories/**","/Segments/**","/Orders/**")
                 .build();
     }
 
