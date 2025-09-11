@@ -14,20 +14,21 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Category {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)// 反向綁定 Product
-    private List<Product> products;
-    // 一對多：category -> products
-
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
+
 }

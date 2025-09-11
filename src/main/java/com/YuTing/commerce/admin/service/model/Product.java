@@ -21,10 +21,8 @@ public class Product {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "categories_id", nullable = false)// FK → categories.id
+    @JoinColumn(name = "categories_id", nullable = true) // 可選，保留單一主分類
     private Category category;
-    // ✅ 單數，對應 Category entity
-    //多對一:product->categories
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<Review> reviews;
