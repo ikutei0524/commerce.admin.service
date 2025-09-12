@@ -21,7 +21,7 @@ public class Product {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = true) // 外鍵
+    @JoinColumn(name = "category_id", nullable = false) // 外鍵
     private Category category;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
