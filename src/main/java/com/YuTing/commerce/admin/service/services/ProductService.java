@@ -1,6 +1,7 @@
 package com.YuTing.commerce.admin.service.services;
 
 import com.YuTing.commerce.admin.service.dtos.requests.ProductRequest;
+import com.YuTing.commerce.admin.service.dtos.responses.CategoryProductResponse;
 import com.YuTing.commerce.admin.service.dtos.responses.ProductResponse;
 import com.YuTing.commerce.admin.service.mappers.ProductMapper;
 import com.YuTing.commerce.admin.service.model.Category;
@@ -61,9 +62,14 @@ public class ProductService {
     }
 
     private ProductResponse mapToResponse(Product product) {
+        CategoryProductResponse categoryResponse = new CategoryProductResponse(
+                product.getCategory().getId(),
+                product.getCategory().getName() // 對應 reference
+        );
+
         return new ProductResponse(
                 product.getId(),
-                product.getCategory().getId(),
+                categoryResponse,   // 改成 DTO
                 product.getImageThumbnail(),
                 product.getImageUrl(),
                 product.getDescription(),

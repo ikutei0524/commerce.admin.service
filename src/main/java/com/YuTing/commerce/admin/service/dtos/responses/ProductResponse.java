@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 public class ProductResponse {
-    private Integer id;
-    private Integer categoryId;// 綁定 Category
+    private Integer id;   // Product 主鍵
+    private CategoryProductResponse category;
     private String imageThumbnail;
     private String imageUrl;
     private String description;

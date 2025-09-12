@@ -1,6 +1,7 @@
 package com.YuTing.commerce.admin.service.mappers;
 
 import com.YuTing.commerce.admin.service.dtos.requests.ProductRequest;
+import com.YuTing.commerce.admin.service.dtos.responses.CategoryProductResponse;
 import com.YuTing.commerce.admin.service.dtos.responses.ProductResponse;
 import com.YuTing.commerce.admin.service.model.Category;
 import com.YuTing.commerce.admin.service.model.Product;
@@ -11,9 +12,16 @@ public class ProductMapper {
 
     // 將 Product Entity 轉成 Response
     public static ProductResponse toResponse(Product product) {
+        CategoryProductResponse categoryDto = null;
+        if (product.getCategory() != null) {
+            categoryDto = new CategoryProductResponse(
+                    product.getCategory().getId(),
+                    product.getCategory().getName() // reference 就是 name
+            );
+        }
         return new ProductResponse(
                 product.getId(),
-                product.getCategory() != null ? product.getCategory().getId() : null,
+                categoryDto,
                 product.getImageThumbnail(),
                 product.getImageUrl(),
                 product.getDescription(),
