@@ -66,6 +66,10 @@ Design ProductCRUD&Request&Response&Mapper
 - 2025/09/11
 訂單介面建立&修繕部分資訊
 未來持續新增reviews
+--------------------------------------------
+- 2025/09/12
+User,Product,Segment,Category方法皆可使用
+Order,review持續修繕
 ```
 
 #### 下方為各資料表設計
