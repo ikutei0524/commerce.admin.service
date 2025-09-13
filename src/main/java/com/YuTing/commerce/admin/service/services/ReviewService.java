@@ -1,16 +1,12 @@
 package com.YuTing.commerce.admin.service.services;
-
 import com.YuTing.commerce.admin.service.dtos.enums.ReviewStatus;
 import com.YuTing.commerce.admin.service.dtos.requests.ReviewRequest;
 import com.YuTing.commerce.admin.service.dtos.requests.UpdateReviewStatusRequest;
-import com.YuTing.commerce.admin.service.dtos.responses.PageResponse;
 import com.YuTing.commerce.admin.service.dtos.responses.ReviewResponse;
-import com.YuTing.commerce.admin.service.dtos.responses.UserResponse;
 import com.YuTing.commerce.admin.service.mappers.ProductMapper;
 import com.YuTing.commerce.admin.service.mappers.ReviewMapper;
 import com.YuTing.commerce.admin.service.mappers.UserMapper;
 import com.YuTing.commerce.admin.service.model.Review;
-import com.YuTing.commerce.admin.service.model.User;
 import com.YuTing.commerce.admin.service.repositories.ReviewRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
