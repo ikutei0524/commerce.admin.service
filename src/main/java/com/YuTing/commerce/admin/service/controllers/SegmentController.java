@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Segments")
+@RequestMapping("/segments")
 @RequiredArgsConstructor
 @Tag(name = "分群管理", description = "管理分群資料")
 public class SegmentController {

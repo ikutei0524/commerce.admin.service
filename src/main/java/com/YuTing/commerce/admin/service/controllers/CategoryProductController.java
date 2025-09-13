@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Category-products")
+@RequestMapping("/category-products")
 @Tag(name = "商品分類", description = "管理商品分類")
 public class CategoryProductController {
 

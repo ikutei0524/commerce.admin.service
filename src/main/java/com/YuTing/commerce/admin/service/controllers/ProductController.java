@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Products")
+@RequestMapping("/products")
 @RequiredArgsConstructor
 @Tag(name = "產品管理介面", description = "管理產品相關 API")
 //以下只是方法,邏輯盡數放在Service裡

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/UserSegments")
+@RequestMapping("/userSegments")
 @RequiredArgsConstructor
 @Tag(name = "使用者與分群介面", description = "管理使用者與分群的關聯")
 public class UserSegmentController {

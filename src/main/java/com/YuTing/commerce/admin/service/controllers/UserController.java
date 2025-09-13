@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 @RestController
-@RequestMapping("/Users")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 @Tag(name = "使用者介面", description = "使用者管理 API")
 public class UserController {
