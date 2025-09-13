@@ -1,7 +1,6 @@
 package com.YuTing.commerce.admin.service.model;
 
 
-import com.YuTing.commerce.admin.service.model.enums.OrderStatusEnum;//使用enums裡的OrderStatus
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 
 @Entity
@@ -38,10 +37,6 @@ public class Order {
     private BigDecimal totalPrice;
     //1.金額最好用 BigDecimal（避免浮點數誤差，雖然你現在用 int 表示台幣沒問題，但未來支援小數或不同幣別會更安全）。
     //2.加上 nullable = false 可以確保不會存 null。
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    private OrderStatusEnum status;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();

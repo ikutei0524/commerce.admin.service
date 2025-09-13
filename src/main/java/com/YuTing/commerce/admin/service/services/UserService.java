@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -31,6 +32,13 @@ public class UserService {
     private final UserRepository userRepository;
     private final SegmentRepository segmentRepository;
     private final UserMapper userMapper = new UserMapper();
+
+
+    public Optional<User> getUserById(int id) {
+        return userRepository.findById(id);
+    }
+
+
 
 
     public UserResponse createUser(UserRequest request) {
@@ -58,10 +66,6 @@ public class UserService {
         // 3. 回傳 Response
         return userMapper.toUserResponse(userRepository.findById(user.getId()).orElseThrow());
     }
-
-
-
-
 
 
     public UserResponse updateUser(int id, UserRequest request) {

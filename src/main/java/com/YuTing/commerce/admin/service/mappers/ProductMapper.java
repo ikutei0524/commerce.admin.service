@@ -5,9 +5,11 @@ import com.YuTing.commerce.admin.service.dtos.responses.CategoryProductResponse;
 import com.YuTing.commerce.admin.service.dtos.responses.ProductResponse;
 import com.YuTing.commerce.admin.service.model.Category;
 import com.YuTing.commerce.admin.service.model.Product;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
+@Component
 public class ProductMapper {
 
     // 將 Product Entity 轉成 Response

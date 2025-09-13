@@ -29,6 +29,10 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    public java.util.Optional<Product> getProductEntityById(Integer id) {
+        return productRepository.findById(id);
+    }
+
     public ProductResponse getProductById(Integer id) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found"));

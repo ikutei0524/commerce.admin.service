@@ -5,9 +5,11 @@ import com.YuTing.commerce.admin.service.dtos.responses.UserResponse;
 import com.YuTing.commerce.admin.service.dtos.responses.UserSegmentResponse;
 import com.YuTing.commerce.admin.service.model.User;
 import com.YuTing.commerce.admin.service.model.UserSegment;
+import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
+@Component
 public class UserMapper {
 
     public UserResponse toUserResponse(User user) {
