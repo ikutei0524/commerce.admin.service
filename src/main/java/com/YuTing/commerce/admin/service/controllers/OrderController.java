@@ -6,9 +6,9 @@ import com.YuTing.commerce.admin.service.services.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -45,4 +45,21 @@ public class OrderController {
     public ResponseEntity<List<OrderResponse>> getOrdersByUser(@PathVariable int userId) {
         return ResponseEntity.ok(orderService.getOrdersByUserId(userId));
     }
+
+
+
+
+    @GetMapping
+    @Operation(
+            summary = "取得訂單分頁",
+            description = "以分頁形式回傳歷史訂單")
+    public ResponseEntity<Page<OrderResponse>> getOrderPage(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "") String query
+    ) {
+        Page<OrderResponse> orderResponses = orderService.getOrderPage(page, size, query);
+        return ResponseEntity.ok(orderResponses);
+    }
+
 }

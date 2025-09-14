@@ -10,6 +10,9 @@ import com.YuTing.commerce.admin.service.repositories.*;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -79,4 +82,33 @@ public class OrderServiceImpl implements OrderService {
                 .map(OrderMapper::toResponse)
                 .toList();
     }
+
+
+
+    @Override
+    public Page<OrderResponse> getOrderPage(int page, int size, String query) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+
+        // 動態查詢條件
+        Specification<Order> spec = (root, q, cb) -> {
+            if (query == null || query.isEmpty()) {
+                return cb.conjunction();
+            }
+            String likeQuery = "%" + query.toLowerCase() + "%";
+
+            return cb.or(
+                    cb.like(cb.lower(root.get("shippingName")), likeQuery),
+                    cb.like(cb.lower(root.get("shippingAddress")), likeQuery),
+                    cb.like(cb.lower(root.get("status")), likeQuery)
+            );
+        };
+
+        // 執行查詢 + 分頁
+        Page<Order> ordersPage = orderRepository.findAll(spec, pageRequest);
+
+        // 轉換成 OrderResponse
+        return ordersPage.map(OrderMapper::toResponse);
+    }
+
+
 }
