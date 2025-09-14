@@ -1,5 +1,6 @@
 package com.YuTing.commerce.admin.service.controllers;
 
+import com.YuTing.commerce.admin.service.dtos.enums.StockFilter;
 import com.YuTing.commerce.admin.service.dtos.requests.ProductRequest;
 import com.YuTing.commerce.admin.service.dtos.responses.ProductResponse;
 import com.YuTing.commerce.admin.service.services.ProductService;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/products")
@@ -21,13 +23,21 @@ public class ProductController {
 
     private final ProductService productService;
 
+
+
+
     @GetMapping
     @Operation(
             summary = "取得所有產品(FindAllProducts)",
             description = "回傳所有產品的清單 (List<ProductResponse>)"
     )
-    public List<ProductResponse> getAllProducts() {
-        return productService.getAllProducts();
+    public List<ProductResponse> getAllProducts(@RequestParam(required = false) String queryName,
+                                                @RequestParam(required = false) Integer categoryId,
+                                                @RequestParam(required = false) StockFilter stockFilter)
+    {
+        return productService.getAllProducts(queryName, categoryId,
+                stockFilter != null ? stockFilter.getStockFrom() : null,
+                stockFilter != null ? stockFilter.getStockTo() : null);
     }
 
     @GetMapping("/{id}")
@@ -79,4 +89,6 @@ public class ProductController {
         Page<ProductResponse> productResponses = productService.getProductPage(page, size);
         return ResponseEntity.ok(productResponses);
     }
+
+
 }

@@ -1,5 +1,6 @@
 package com.YuTing.commerce.admin.service.services;
 
+import com.YuTing.commerce.admin.service.dtos.enums.StockFilter;
 import com.YuTing.commerce.admin.service.dtos.requests.ProductRequest;
 import com.YuTing.commerce.admin.service.dtos.responses.CategoryProductResponse;
 import com.YuTing.commerce.admin.service.dtos.responses.ProductResponse;
@@ -8,12 +9,15 @@ import com.YuTing.commerce.admin.service.model.Category;
 import com.YuTing.commerce.admin.service.model.Product;
 import com.YuTing.commerce.admin.service.repositories.CategoryRepository;
 import com.YuTing.commerce.admin.service.repositories.ProductRepository;
+import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,9 +28,9 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
 
-    public List<ProductResponse> getAllProducts() {
-        return productRepository.findAll()
-                .stream()
+    public List<ProductResponse> getAllProducts(String query, Integer categoryId, Integer stockFrom, Integer stockTo) {
+        Specification<Product> spec = productSpecification(query, categoryId, stockFrom, stockTo);
+        return productRepository.findAll(spec).stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
     }
@@ -94,6 +98,46 @@ public class ProductService {
 
         return productRepository.findAll(pageRequest)
                 .map(this::mapToResponse);
+    }
+
+    // 🔹 新增：支援查詢條件 (名稱 / 分類 / 庫存範圍)
+    public List<ProductResponse> getFilteredProducts(String queryName, Integer categoryId, StockFilter stockFilter) {
+        Integer stockFrom = stockFilter != null ? stockFilter.getStockFrom() : null;
+        Integer stockTo   = stockFilter != null ? stockFilter.getStockTo()   : null;
+
+        Specification<Product> spec = productSpecification(queryName, categoryId, stockFrom, stockTo);
+
+        return productRepository.findAll(spec)
+                .stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+    }
+
+    private Specification<Product> productSpecification(String queryName, Integer categoryId, Integer stockFrom, Integer stockTo) {
+        return (((root, query, criteriaBuilder) ->  {
+            List<Predicate> predicates = new ArrayList<>();
+            if(queryName != null && !queryName.isEmpty()) {
+                predicates.add(criteriaBuilder.or(
+                        criteriaBuilder.like(criteriaBuilder.lower(root.get("reference")), "%"+ queryName.toLowerCase()+"%")
+                ));
+            }
+
+            if(categoryId != null) {
+                predicates.add(criteriaBuilder.equal(root.get("category").get("id"), categoryId));
+            }
+
+            if(stockFrom != null && stockTo == null) {
+                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("stock"), stockFrom));
+            }
+
+            if(stockFrom != null && stockTo != null) {
+                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("stock"), stockFrom));
+                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("stock"), stockTo));
+            }
+
+            Predicate[] predicateArray = predicates.toArray(new Predicate[0]);
+            return criteriaBuilder.and(predicateArray);
+        }));
     }
 
 
