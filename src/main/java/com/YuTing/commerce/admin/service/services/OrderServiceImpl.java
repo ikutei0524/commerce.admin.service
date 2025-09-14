@@ -41,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
         order.setReturned(false);
 
         List<OrderItem> items = new ArrayList<>();
-        BigDecimal total = BigDecimal.ZERO;
+        BigDecimal sum = BigDecimal.ZERO;
 
         for (OrderItemRequest itemRequest : request.getItems()) {
             Product product = productRepository.findById(itemRequest.getProductId())
@@ -52,16 +52,27 @@ public class OrderServiceImpl implements OrderService {
             item.setProduct(product);
             item.setQuantity(itemRequest.getQuantity());
 
-            // 🔑 這裡一定要設 price，不然 Hibernate insert 時是 null
             BigDecimal subtotal = product.getPrice()
                     .multiply(BigDecimal.valueOf(itemRequest.getQuantity()));
-            item.setPrice(subtotal);
 
-            total = total.add(subtotal);
+            item.setPrice(subtotal);
+            sum = sum.add(subtotal);
             items.add(item);
         }
 
         order.setOrderItems(items);
+
+        // 🚀 新增運費 & 稅金邏輯（假設固定運費、固定稅率）
+        BigDecimal delivery = new BigDecimal("7.16"); // 或者從配置 / request 帶進來
+        BigDecimal taxRate = new BigDecimal("0.17");  // 17%
+        BigDecimal tax = sum.multiply(taxRate);
+
+        // 設定到 Entity
+        order.setDelivery(delivery);
+        order.setTax(tax);
+
+        // 最後總價
+        BigDecimal total = sum.add(delivery).add(tax);
         order.setTotalPrice(total);
 
         Order saved = orderRepository.save(order);
