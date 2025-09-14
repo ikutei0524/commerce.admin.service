@@ -6,6 +6,8 @@ import com.YuTing.commerce.admin.service.services.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -63,5 +65,18 @@ public class ProductController {
     )
     public void deleteProduct(@PathVariable Integer id) {
         productService.deleteProduct(id);
+    }
+
+    @GetMapping("/page")
+    @Operation(
+            summary = "產品分頁",
+            description = "以分頁形式取得產品資訊"
+    )
+    public ResponseEntity<Page<ProductResponse>> getProductPage(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        Page<ProductResponse> productResponses = productService.getProductPage(page, size);
+        return ResponseEntity.ok(productResponses);
     }
 }

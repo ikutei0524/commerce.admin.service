@@ -51,7 +51,7 @@ public class SegmentService {
     public void deleteSegment(Integer id) {
         Segment segment = segmentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Segment not found"));
-        segment.setDeletedAt(LocalDateTime.now()); // 標記刪除
+        segment.setDeletedAt(LocalDateTime.now());
         segmentRepository.save(segment);
     }
 }

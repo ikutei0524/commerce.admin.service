@@ -9,6 +9,8 @@ import com.YuTing.commerce.admin.service.model.Product;
 import com.YuTing.commerce.admin.service.repositories.CategoryRepository;
 import com.YuTing.commerce.admin.service.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -68,12 +70,12 @@ public class ProductService {
     private ProductResponse mapToResponse(Product product) {
         CategoryProductResponse categoryResponse = new CategoryProductResponse(
                 product.getCategory().getId(),
-                product.getCategory().getName() // 對應 reference
+                product.getCategory().getName()
         );
 
         return new ProductResponse(
                 product.getId(),
-                categoryResponse,   // 改成 DTO
+                categoryResponse,
                 product.getImageThumbnail(),
                 product.getImageUrl(),
                 product.getDescription(),
@@ -86,4 +88,15 @@ public class ProductService {
                 product.getUpdatedAt()
         );
     }
+
+    public Page<ProductResponse> getProductPage(int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+
+        return productRepository.findAll(pageRequest)
+                .map(this::mapToResponse);
+    }
+
+
+
+
 }
