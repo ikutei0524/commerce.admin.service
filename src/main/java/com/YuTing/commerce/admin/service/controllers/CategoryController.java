@@ -4,6 +4,7 @@ import com.YuTing.commerce.admin.service.dtos.requests.CategoryRequest;
 import com.YuTing.commerce.admin.service.dtos.responses.CategoryResponse;
 import com.YuTing.commerce.admin.service.services.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.util.List;
 @RequestMapping("/categories")
 @RequiredArgsConstructor
 @Tag(name = "分類管理", description = "管理商品分類")
+@SecurityRequirement(name = "bearerAuth")
 public class CategoryController {
 
     private final CategoryService categoryService;

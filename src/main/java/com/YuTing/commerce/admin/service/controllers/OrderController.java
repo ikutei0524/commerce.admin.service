@@ -4,6 +4,7 @@ import com.YuTing.commerce.admin.service.dtos.requests.OrderRequest;
 import com.YuTing.commerce.admin.service.dtos.responses.OrderResponse;
 import com.YuTing.commerce.admin.service.services.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,7 @@ import java.util.List;
 @RequestMapping("/orders")
 @RequiredArgsConstructor
 @Tag(name = "訂單介面", description = "訂單管理 API")
+@SecurityRequirement(name = "bearerAuth")
 public class OrderController {
 
     private final OrderService orderService;

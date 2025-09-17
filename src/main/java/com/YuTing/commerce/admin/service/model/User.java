@@ -1,11 +1,13 @@
 package com.YuTing.commerce.admin.service.model;
 
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,6 +18,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = {"orders", "reviews", "userSegments"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -4,6 +4,7 @@ import com.YuTing.commerce.admin.service.dtos.requests.SegmentRequest;
 import com.YuTing.commerce.admin.service.dtos.responses.SegmentResponse;
 import com.YuTing.commerce.admin.service.services.SegmentService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.util.List;
 @RequestMapping("/segments")
 @RequiredArgsConstructor
 @Tag(name = "分群管理", description = "管理分群資料")
+@SecurityRequirement(name = "bearerAuth")
 public class SegmentController {
 
     private final SegmentService segmentService;

@@ -5,6 +5,7 @@ import com.YuTing.commerce.admin.service.dtos.requests.UpdateReviewStatusRequest
 import com.YuTing.commerce.admin.service.dtos.responses.ReviewResponse;
 import com.YuTing.commerce.admin.service.services.ReviewService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("reviews")
 @Tag(name = "評論管理介面", description = "評論相關 API")
+@SecurityRequirement(name = "bearerAuth")
 public class ReviewController {
 
     private final ReviewService reviewService;

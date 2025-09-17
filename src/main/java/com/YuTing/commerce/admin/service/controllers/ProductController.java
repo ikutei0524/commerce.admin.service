@@ -5,6 +5,7 @@ import com.YuTing.commerce.admin.service.dtos.requests.ProductRequest;
 import com.YuTing.commerce.admin.service.dtos.responses.ProductResponse;
 import com.YuTing.commerce.admin.service.services.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/products")
 @RequiredArgsConstructor
 @Tag(name = "產品管理介面", description = "管理產品相關 API")
+@SecurityRequirement(name = "bearerAuth")
 //以下只是方法,邏輯盡數放在Service裡
 public class ProductController {
 
