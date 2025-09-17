@@ -69,7 +69,11 @@ Design ProductCRUD&Request&Response&Mapper
 --------------------------------------------
 - 2025/09/12
 User,Product,Segment,Category方法皆可使用
-Order,review持續修繕
+Order,Review持續修繕
+--------------------------------------------
+- 2025/09/17
+Order,Review測試完畢
+新增Auth(已測試完成)
 ```
 
 #### 下方為各資料表設計
