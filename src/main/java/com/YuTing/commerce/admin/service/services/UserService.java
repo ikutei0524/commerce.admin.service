@@ -153,8 +153,8 @@ public class UserService {
     }
 
 
-    public Optional<User> getUserByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
+    //public Optional<User> getUserByEmail(String email) {
+        //return userRepository.findByEmail(email);//待修繕
+    //}我想在jwt
 }
 

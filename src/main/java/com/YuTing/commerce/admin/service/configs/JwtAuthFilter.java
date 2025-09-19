@@ -27,11 +27,14 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final UserService userService;
 
+    private final UserRepository userRepository;
+
 
     @Autowired
-    public JwtAuthFilter(JwtService jwtService, UserService userService) {
+    public JwtAuthFilter(JwtService jwtService, UserService userService,UserRepository userRepository) {
         this.jwtService = jwtService;
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
 
@@ -50,7 +53,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String email = jwtService.getEmailFromToken(jwtToken);
         if(email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             // db裡面找到對應的userEmail
-            Optional<User> user = userService.getUserByEmail(email);
+            Optional<User> user = userRepository.findByEmail(email);
             //todo 驗證token是否過期或無效
             if (user.isPresent()) {
 
