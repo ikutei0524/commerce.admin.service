@@ -74,6 +74,12 @@ Order,Review持續修繕
 - 2025/09/17
 Order,Review測試完畢
 新增Auth(已測試完成)
+--------------------------------------------
+- 2025/09/22
+Docker compose 包裝SQL&commerce.admin.service
+CI/CD 部署完成
+建立VM 進行測試
+Finish!
 ```
 
 #### 下方為各資料表設計
